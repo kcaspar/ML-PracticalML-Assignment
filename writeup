@@ -4,9 +4,7 @@
 4. Training and Cross Validation Data
 5. Training the Model
 6. Performance evaluation
-7. Predictions I
-8. Predictions II
-9. Next steps
+7. Next steps
 
 1. Data load
 The data is in CSV format and both the training and test set are loaded with the standard R function.
@@ -17,7 +15,7 @@ The data consists of about 20.000 entries each with 160 variables. Initially the
 
 A. Since the goal is to predict quality of movements the focus is on numerical variables that measure speed, angles, acceleration etc. In a first step all non-numerical variables are deleted from the data set. The only qualitative variable that is retained is the outcome with its 5 different qualifiers
 
-B. The data also shows a significant number of NA entries in the data set. Hence a critical step is to identify and remove columns that are NA dominated. Here a threshold of 90% is applied, however it appears that almost all the NA entries occurred in columns that only contained NA and should be removed since they contain no information at all. 
+B. The data contains a significant number of NA entries p. Hence a critical step is to identify and remove columns that are NA dominated. Here a threshold of 90% is applied, however it appears that almost all the NA entries occurred in columns that only contained NA and should be removed since they contain no information at all. 
 
 C. Lastly the data is filtered for complete cases, which produces almost the entire dataset (more than 19.000 are retained).
 
@@ -35,18 +33,12 @@ The model achieves an accuracy of 100% on the training data and about 98.6% accu
 
 However, it appears the model is overfitting the training data and hence an outline for improvements is described in the next steps section.
 
-7. Predictions I
-The model was applied to the test data and returned an accuracy of 75%. This result is well below the cross validation performance.
-
-8. Predictions II
-To reduce overfitting the PCA was repeated so that only 10 variables were required to retain 80% of the variability in the data. The model was retrained and achieved an accuracy of about 98.6% on the training data and slightly above 95% on the cross validation data. From the 5 predictions that were wrong under first approach, 4 were now predicted differently. (I did not have time anymore to verify the results).
-
-9. Next steps - possible scenarios to improve prediction results.
+7. Next steps - possible scenarios to improve prediction results.
 The number of training and cross validation cases is large, yet the model was able to find a solution that performed with very high accuracy on both. This suggests that the model is overfitting the data. 
 
 Scenario 1.
 Iterate the above approach with a reduced number of training cases and find a threshold where the prediction accuracy for training and cross validation data is dropping. As a result of the reduced overfit the model may generalize better on the test set.
 
 Scenario 2.
-Perform data cleaning as described. However do not apply PCA. Iterate training on varying training data set sizes and find a threshold where the model performs sufficiently well on training and cross validation data without overfitting the data. By keeping more predictors the model becomes more complex and together with the reduced number of data sets overfitting can be avoided. Hence the model may generalize better.
+Perform data cleaning as described. However do not apply PCA. Iterate training on varying training data set sizes and find a threshold where the model performs sufficiently well on training and cross validation data without overfitting the data. By keeping more predictors the model becomes more complex and together with the optimized number of data sets overfitting can be avoided. Hence the model may generalize better.
 
