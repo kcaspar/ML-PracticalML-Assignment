@@ -4,6 +4,49 @@
 4. Training and Cross Validation Data
 5. Training the Model
 6. Performance evaluation
-7. Predictions
-8. Next steps
+7. Predictions I
+8. Predictions II
+9. Next steps
+
+1. Data load
+The data is in CSV format and both the training and test set are loaded with the standard R function.
+The training set is separated into the predictors and outcome (classe) and in the test set the column "problem-id" which corresponds to "classe" is dropped.
+
+2. Data Cleaning
+The data consists of about 20.000 entries each with 160 entries. Initially there are only about 400 complete cases in the entire data set. Hence the following data cleaning strategy is applied.
+
+A. Since the goal is to predict quality of movements the focus is on numerical variables that measure speed, angles, acceleration etc. In a first step all non-numerical variables are deleted from the data set. The only qualitative variable that is retained is the outcome with its 5 different qualifiers
+
+B. The data also shows a significant number of NA entries in the data set. Hence a critical step is to identify and remove columns that are NA dominated. Here a threshold of 90% is applied, however it appears that almost all the NA entries occurred in columns that only contained NA and should be removed since they contain no information at all. 
+
+C. Lastly the data is filtered for complete cases, which produces almost the entire dataset, since more than 19.000 are retained.
+
+3. Data Compression
+Applying PCA allows to express more than 90% of the variability with about 20 variables. That is a significant reduction again so that the number of variables can be reduced from 160 to 21 after cleaning, compression and applying PCA.
+
+4. Training and Crossvalidation Data
+The dataset is now split into 60% training data and 40% Cross validation Data. That allows to train the model and test it with a large number of cases before applying the model to the test set.
+
+5. Training the Model
+The model is now trained with the training data, applying a random forest algorithm. The expectation is that this approach is identifies the most important variables that determine the quality of the exercise. For example a slow and controlled up lift of the barbell with little sideward motion may be the key to achieve highest quality results. Low quality results (for example heavy sideward shaking of the arm) maybe described by the angular velocity of the barbell rather than those of the arm.
+
+6. Performance evaluation
+The model achieves an accuracy of 100% on the training data and about 98.6% accuracy on the cross validation data (accuracy is calculated by calculating the %age of correct classifications on the training data and cross validation data). Based on this the expectation is that the model will perform reasonably well on the test data too. The distribution of the prediction results matched the distribution of the expected results (i.e. the % of the quality indicators in the predictions and outcomes sets were roughly the same). 
+
+However, it appears the model is overfitting the training data and hence an outline for improvements is described in the next steps section.
+
+7. Predictions I
+The model was applied to the test data and returned an accuracy of 75%. This result is well below the cross validation performance.
+
+8. Predictions II
+To reduce overfitting the PCA was repeated so that only 10 variables were required to retain 80% of the variability in the data. The model was retrained and achieved an accuracy of about 98.6% on the training data and slightly above 95% on the cross validation data. From the 5 predictions that were wrong under first approach, 4 were now predicted differently. (I did not have time anymore to verify the results).
+
+9. Next steps - possible scenarios to improve prediction results.
+The number of training and cross validation cases is large, yet the model was able to find a solution that performed with very high accuracy on both. This suggests that the model is overfitting the data. 
+
+Scenario 1.
+Iterate the above approach with a reduced number of training cases and find a threshold where the prediction accuracy for training and cross validation data is dropping. As a result of the reduced overfit the model may generalize better on the test set.
+
+Scenario 2.
+Perform data cleaning as described. However do not apply PCA. Iterate training on varying training data set sizes and find a threshold where the model performs sufficiently well on training and cross validation data without overfitting the data. By keeping more predictors the model becomes more complex and together with the reduced number of data sets overfitting can be avoided. Hence the model may generalize better.
 
