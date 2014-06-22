@@ -1,3 +1,3 @@
 ML-PracticalML-Assignment
 =========================
-test test test
+Apologies, I used a simple text file edited online away from home, since my travel schedule barely allowed me to complete 2 iterations of my model. If necessary, please se the softwrap option on the right above the text window in github to display paragraphs properly.
