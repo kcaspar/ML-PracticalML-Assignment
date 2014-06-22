@@ -13,13 +13,13 @@ The data is in CSV format and both the training and test set are loaded with the
 The training set is separated into the predictors and outcome (classe) and in the test set the column "problem-id" which corresponds to "classe" is dropped.
 
 2. Data Cleaning
-The data consists of about 20.000 entries each with 160 entries. Initially there are only about 400 complete cases in the entire data set. Hence the following data cleaning strategy is applied.
+The data consists of about 20.000 entries each with 160 variables. Initially there are only about 400 complete cases in the entire data set. Hence the following data cleaning strategy is applied.
 
 A. Since the goal is to predict quality of movements the focus is on numerical variables that measure speed, angles, acceleration etc. In a first step all non-numerical variables are deleted from the data set. The only qualitative variable that is retained is the outcome with its 5 different qualifiers
 
 B. The data also shows a significant number of NA entries in the data set. Hence a critical step is to identify and remove columns that are NA dominated. Here a threshold of 90% is applied, however it appears that almost all the NA entries occurred in columns that only contained NA and should be removed since they contain no information at all. 
 
-C. Lastly the data is filtered for complete cases, which produces almost the entire dataset, since more than 19.000 are retained.
+C. Lastly the data is filtered for complete cases, which produces almost the entire dataset (more than 19.000 are retained).
 
 3. Data Compression
 Applying PCA allows to express more than 90% of the variability with about 20 variables. That is a significant reduction again so that the number of variables can be reduced from 160 to 21 after cleaning, compression and applying PCA.
